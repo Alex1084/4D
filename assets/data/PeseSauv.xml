@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<peseCampagne>
+	<uneJourne>
+		<date>24/02/2021</date>
+		<Pesee type ="TetQ">
+			<Volume>18</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>18</Enfoncement>
+			<EnfoncementR>18.5</EnfoncementR>
+			<VolumeAp>3.3300</VolumeAp>
+		</Pesee>
+		<Pesee type ="EdV">
+
+			<Volume>84.6</Volume>
+			<Temperature>20.5</Temperature>
+			<Enfoncement>71.1</Enfoncement>
+			<EnfoncementR>70.9</EnfoncementR>
+			<VolumeAp>62.1084</VolumeAp>
+		</Pesee>
+		<Pesee type ="Seconde">
+
+			<Volume>47</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>37.2</Enfoncement>
+			<EnfoncementR>37.4</EnfoncementR>
+			<VolumeAp>17.5780</VolumeAp>
+		</Pesee>
+		<Pesee type ="Brouillis">
+
+			<Volume>203</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>30.9</Enfoncement>
+			<EnfoncementR>30.9</EnfoncementR>
+			<VolumeAp>62.7270</VolumeAp>
+		</Pesee>
+		<Pesee type ="BC">
+
+			<Volume>250</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>31.9</Enfoncement>
+			<EnfoncementR>32.1</EnfoncementR>
+			<VolumeAp>80.2500</VolumeAp>
+		</Pesee>
+		<rendement>25.3</rendement>
+	</uneJourne>
+	<uneJourne>
+		<date>23/02/2021</date>
+		<Pesee type ="TetQ">
+			<Volume>18</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>18.5</Enfoncement>
+			<EnfoncementR>18.5</EnfoncementR>
+			<VolumeAp>3.3300</VolumeAp>
+		</Pesee>
+		<Pesee type ="EdV">
+
+			<Volume>84.6</Volume>
+			<Temperature>20.5</Temperature>
+			<Enfoncement>71.1</Enfoncement>
+			<EnfoncementR>70.9</EnfoncementR>
+			<VolumeAp>62.1084</VolumeAp>
+		</Pesee>
+		<Pesee type ="Seconde">
+
+			<Volume>47</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>37.2</Enfoncement>
+			<EnfoncementR>37.4</EnfoncementR>
+			<VolumeAp>17.5780</VolumeAp>
+		</Pesee>
+		<Pesee type ="Brouillis">
+
+			<Volume>203</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>30.9</Enfoncement>
+			<EnfoncementR>30.9</EnfoncementR>
+			<VolumeAp>62.7270</VolumeAp>
+		</Pesee>
+		<Pesee type ="BC">
+
+			<Volume>250</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>31.9</Enfoncement>
+			<EnfoncementR>32.1</EnfoncementR>
+			<VolumeAp>80.2500</VolumeAp>
+		</Pesee>
+		<rendement>25.3</rendement>
+	</uneJourne>
+	<uneJourne>
+		<date>22/02/2021</date>
+		<Pesee type ="TetQ">
+			<Volume>18</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>18.5</Enfoncement>
+			<EnfoncementR>18.5</EnfoncementR>
+			<VolumeAp>3.3300</VolumeAp>
+		</Pesee>
+		<Pesee type ="EdV">
+
+			<Volume>84.6</Volume>
+			<Temperature>20.5</Temperature>
+			<Enfoncement>71.1</Enfoncement>
+			<EnfoncementR>70.9</EnfoncementR>
+			<VolumeAp>62.1084</VolumeAp>
+		</Pesee>
+		<Pesee type ="Seconde">
+
+			<Volume>47</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>37.2</Enfoncement>
+			<EnfoncementR>37.4</EnfoncementR>
+			<VolumeAp>17.5780</VolumeAp>
+		</Pesee>
+		<Pesee type ="Brouillis">
+
+			<Volume>203</Volume>
+			<Temperature>20</Temperature>
+			<Enfoncement>30.9</Enfoncement>
+			<EnfoncementR>30.9</EnfoncementR>
+			<VolumeAp>62.7270</VolumeAp>
+		</Pesee>
+		<Pesee type ="BC">
+
+			<Volume>250</Volume>
+			<Temperature>19.5</Temperature>
+			<Enfoncement>31.9</Enfoncement>
+			<EnfoncementR>32.1</EnfoncementR>
+			<VolumeAp>80.2500</VolumeAp>
+		</Pesee>
+		<rendement>25.3</rendement>
+	</uneJourne>
+
+</peseCampagne>
