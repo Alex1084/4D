@@ -1,7 +1,9 @@
 import 'package:xml/xml.dart';
 import '../metier/GuideAlcoo.dart';
 
-
+// cette classe est utiliser pour transformer le fichier appeler (un fichier placer dans assets/data/cahierJaune)
+// et transforme une balise <unLigne> en un objet GuideAlcoo
+// puis ces objet stocke dans une list
 class DocXml {
   //List<GuideAlcoo> feuilleB = new List();
    XmlDocument _doc;

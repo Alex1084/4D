@@ -7,11 +7,14 @@ class SauvPese{
   XmlBuilder builder;
   SauvPese({String path}){
 
-    sauvegarde = new XmlDocument.parse(path);
+    sauvegarde = new XmlDocument.parse(path); //le document Xml sauvegarde reçois le text du fichier sauvegarder sur l'appereil
     builder = new XmlBuilder();
   }
 
-  void testread(String date, ConteneurVeille unContainer) {
+  //cette methode recherche dans tout le document la pese ayant le type demander et la date damande
+  //si les donnee sont trouver alors le conteneur place en parametre reçois les valeur trouver
+  //sinon il les valeur sont mise a zero
+  void setRead(String date, ConteneurVeille unContainer) {
     bool trouver = false;
      sauvegarde.findAllElements('uneJourne').forEach((element) {
       //element.attributes.first.text;
@@ -60,6 +63,9 @@ class SauvPese{
     this.sauvegarde.children.clear();
   }
 
+  //cette methode enregistre toutes les pese contenue dans la map avec l'appel de la methode enregPese
+  //les builder ce place dans une balise unejourne si un balise qui contient la balise du jour existe,
+  //sinon un balise unejourne est creer avec la date du jour
   enregJour(XmlBuilder builder, String unDate, Map<int,JourConteneur> lesData){
    //print(sauvegarde.toXmlString());
     bool trouver = false;
@@ -86,6 +92,8 @@ class SauvPese{
     //
   }
 
+
+  //cette methode enregistre une pesee d'un conteneur se conteneur est ensuite identifier par son atribut pour pouvoir connaitre le type de pese
   void enregPese(XmlBuilder builder, JourConteneur unContainer){
     builder.element('Pesee', nest: () {
       builder.attribute('type', '${unContainer.getAttributXml()}');

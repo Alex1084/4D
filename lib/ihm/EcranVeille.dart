@@ -61,17 +61,17 @@ class _EcranVeille extends State<EcranVeille> {
   //cette methode est celle qui va chercher dans le fichier les donne correspondante au conteneur et au jour place en parametre
   // puis après les Conteuneur inisialiser la methode appelle d'autre methode pour calculer les donnee non sauvegarder.
   setLesContainer()async{
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _vin);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _vinSoir);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueueSoir);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _secondeSoir);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _brouillisNuit);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _bc);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueue);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _edv);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _secondes);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _brouillis);
-    donneCampagne.testread(DateFormat('dd/MM/yyyy').format(jourVerif), _trenteBc);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _vin);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _vinSoir);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueueSoir);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _secondeSoir);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _brouillisNuit);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _bc);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueue);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _edv);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _secondes);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _brouillis);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _trenteBc);
     setCuvierCharge();
     setBrouillisJour();
     setLesRendement();

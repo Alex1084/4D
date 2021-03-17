@@ -6,15 +6,18 @@ import '../Xml/SauvPese.dart';
 
 import '../metier/ConteneurJour.dart';
 
+//la structure de cette ecrant est très similaire a l'ecran de Jour
 
-
+//cette ecran est utiliser par les distilateur travaillant de nuit,
+// le distilateur en chef remplie les conteneur vin secondevin et teteEtQueuevin pour le distilateur
+// ensuite lorque les brouillis obtenue sont mesure les distilateur saisie le conteneur brouillis nuit et enregistre les donnée de cette ecran
 class EcranNuit extends StatefulWidget{
   @override
   _EcranNuit createState() => new _EcranNuit();
 }
 
 class _EcranNuit extends State<EcranNuit>{
-  JourConteneur _vin, _secondeVin, _teteEtQueueVin, _BrouillisNuit;
+  JourConteneur _vin, _secondeVin, _teteEtQueueVin, _BrouillisNuit; //ces conteneur sont des Statefullwidget et sont donc implementer directement dans l'interface en appelent l'objet
   double _totalVolume, _totalVolumeAp, _rendement;
   SauvPese enregistreNuit;
   @override
@@ -32,6 +35,7 @@ class _EcranNuit extends State<EcranNuit>{
 
   }
 
+  // cette methode insert les conteneur dans un Dictionnaire pour ensuite les enregistre grace a la classe SauvPese
   void enregistrer() async{
     Map<int, JourConteneur> _mapEnreg = new Map<int, JourConteneur>();
     String text;
@@ -47,6 +51,8 @@ class _EcranNuit extends State<EcranNuit>{
 
   }
 
+  // cette methode lis la memoire cache pour ensuite atribuer au conteneur qui a deja été saisie
+  // les valeur qui on ete oublier par le programme (a cause d'un changement d'ecran)
   void readCache()async{
     String _cacheText;
     _cacheText = await FileUtils.readCacheNuit();
@@ -130,11 +136,16 @@ class _EcranNuit extends State<EcranNuit>{
                   ),
                 ],
               ),
+              // cette ligne concerne la mise en chaudiere ce sont ces conteneur qui sont saisie par le distilateur en chef
               Row(
                 children : [
                 _vin,
                 _secondeVin,
                 _teteEtQueueVin,
+
+                //ce conteneur a pour but d'indiquer la somme des trois conteneur si dessus
+                // ces donnee ne sont pas enregistrer car elles sont purement a tritre informatif pour le distilateur
+                // de plus elles peuvent etre recalculer grace au trois conteneur si dessus
                 Container(
                   height: MediaQuery
                       .of(context)
@@ -214,13 +225,15 @@ class _EcranNuit extends State<EcranNuit>{
                   ),
                 ],
               ),
+              // cette ligne concerne les conteneur saisie par le distilateur après ces pesee
               Row(
                 children: [
                   _BrouillisNuit,
                 ],
               ),
+
+              // appelle la methode enregistre et efface les donnees de la memoire cache de nuit puis affiche un pop up pour confirmer l'enregistrement
               RaisedButton(onPressed: () {
-                try {
                   enregistrer();
                   FileUtils.writeCacheNuit('');
                   showDialog(context: context, builder: (context) {
@@ -235,13 +248,7 @@ class _EcranNuit extends State<EcranNuit>{
                     );
                   }
                   );
-                }
-                catch(e){
 
-                }
-                setState(){
-
-                }
               },
                 child: Text('enregistrer'),)
             ],

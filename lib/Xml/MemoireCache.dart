@@ -1,7 +1,8 @@
 import '../metier/ConteneurJour.dart';
 import 'package:xml/xml.dart';
 
-
+// cette classe utilise le meme principe que la classe SauvPese
+// a le diference près que cette classe enregistre automatiquement les donne dans la memoire cache
 class MemoireCache{
 
   XmlDocument sauvegarde;

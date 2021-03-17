@@ -5,9 +5,12 @@ import '../Xml/FileUtils.dart';
 import '../metier/ConteneurJour.dart';
 import 'package:flutter/material.dart';
 
+//la structure de cette ecrant est très similaire a l'ecran de nuit
 
-
-
+//cette ecran est utiliser par les distilateur travaillant de journee,
+// le distilateur en chef remplie les conteneur vin et bc pour le distilateur
+// ensuite lorque les alcool obtenue sont mesure les distilateur saisie le conteneur concernant le type "d'alcool"
+// et enregistre les données de cette ecran une fois que tout a été remplis
 class EcranJournee extends StatefulWidget{
 
   EcranJournee({Key key}) : super(key: key);
@@ -17,7 +20,7 @@ class EcranJournee extends StatefulWidget{
 }
 
 class _EcranJournee extends State<EcranJournee>{
-  JourConteneur _vin, _teteEtQueue, _edv, _secondes, _brouillis, _trenteBc;
+  JourConteneur _vin, _teteEtQueue, _edv, _secondes, _brouillis, _trenteBc; //ces conteneur sont des Statefullwidget et sont donc implementer directement dans l'interface en appelent l'objet
   JourConteneur _bc;
 
   SauvPese enregistreJourne;
@@ -26,7 +29,6 @@ class _EcranJournee extends State<EcranJournee>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    initEnregistreJourne();
     this._vin = new JourConteneur('Vin', 'vinMatin');
     this._teteEtQueue = new JourConteneur('Tete & Queue','TetQ');
     this._edv = new JourConteneur('Eau de vie','EdV');
@@ -37,33 +39,11 @@ class _EcranJournee extends State<EcranJournee>{
     readCache();
   }
 
-  void readCache()async{
 
-    String _cacheText;
-    _cacheText = await FileUtils.readCacheJour();
-    //_cacheText = '';
-    if (_cacheText == ''){
-      String textInit = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<uneJourne>\n</uneJourne>';
-      FileUtils.writeCacheJour(textInit);
-      JourConteneur.initEnregCache(textInit);
-
-    }
-    else{
-        JourConteneur.enregCache.readCacheXml(_vin);
-        JourConteneur.enregCache.readCacheXml(_bc);
-        JourConteneur.enregCache.readCacheXml(_teteEtQueue);
-        JourConteneur.enregCache.readCacheXml(_edv);
-        JourConteneur.enregCache.readCacheXml(_brouillis);
-        JourConteneur.enregCache.readCacheXml(_secondes);
-        JourConteneur.enregCache.readCacheXml(_trenteBc);
-        setState(() {});
-    }
-  }
-  void initEnregistreJourne() async{
+  // cette methode initialise d'abord l'objet enrigistre donne (qui va donne une "valeur" au document xml)
+  // puis elle insert les conteneur dans un Dictionnaire pour ensuite les enregistre grace a la classe SauvPese
+  void enregistrer() async{
     enregistreJourne = new SauvPese(path: await FileUtils.readPeseSauv());
-  }
-
-  void enregistrer(){
     String _text;
     Map<int, JourConteneur> _mapEnreg = new Map<int, JourConteneur>();
     _mapEnreg[1] = _vin;
@@ -79,7 +59,29 @@ class _EcranJournee extends State<EcranJournee>{
 
 
   }
+  // cette methode lis la memoire cache pour ensuite atribuer au conteneur qui a deja été saisie
+  // les valeur qui on ete oublier par le programme (a cause d'un changement d'ecran)
+  void readCache()async{
 
+    String _cacheText;
+    _cacheText = await FileUtils.readCacheJour();
+    if (_cacheText == ''){
+      String textInit = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<uneJourne>\n</uneJourne>';
+      FileUtils.writeCacheJour(textInit);
+      JourConteneur.initEnregCache(textInit);
+
+    }
+    else{
+      JourConteneur.enregCache.readCacheXml(_vin);
+      JourConteneur.enregCache.readCacheXml(_bc);
+      JourConteneur.enregCache.readCacheXml(_teteEtQueue);
+      JourConteneur.enregCache.readCacheXml(_edv);
+      JourConteneur.enregCache.readCacheXml(_brouillis);
+      JourConteneur.enregCache.readCacheXml(_secondes);
+      JourConteneur.enregCache.readCacheXml(_trenteBc);
+      setState(() {});
+    }
+  }
   @override
   Widget build(BuildContext context){
     //enregistreJourne.testread(DateFormat('dd/MM/yyyy').format(DateTime.now().subtract(Duration(days: 1))), _bc);
@@ -151,7 +153,7 @@ class _EcranJournee extends State<EcranJournee>{
                       ),
                     ],
                   ),
-                  //cette Ligne designe la premier partie de tableau Cuve et Vin.
+                    // cette ligne concerne la mise en chaudiere ce sont ces conteneur qui sont saisie par le distilateur en chef
                   Row(
                     children: <Widget>[
                       _vin,
@@ -187,7 +189,7 @@ class _EcranJournee extends State<EcranJournee>{
                       ),
                     ],
                   ),
-                  // Cette Ligne designe le premier ensemble des pesée de la journée. (T&Q, EDV, Secondes).
+                    // cette ligne concerne les conteneur saisie par le distilateur après ces pesee (T&Q, EDV, brouille).
                   Row(
                     children: <Widget>[
                       _teteEtQueue,
@@ -195,7 +197,7 @@ class _EcranJournee extends State<EcranJournee>{
                       _brouillis,
                     ],
                   ),
-                  // Cette Ligne designe le premier ensemble des pesée de la journée. (T&Q, EDV, Secondes).
+                    // cette ligne concerne les conteneur saisie par le distilateur après ces pesee (seconde et la cuve 30BC)
                   Row(
                     children: <Widget>[
                       _secondes,
@@ -205,8 +207,8 @@ class _EcranJournee extends State<EcranJournee>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        // appelle la methode enregistre et efface les donnees de la memoire cache de jour puis affiche un pop up pour confirmer l'enregistrement
                         RaisedButton(onPressed: () {
-
                             enregistrer();
                             FileUtils.writeCacheJour('');
                             showDialog(context: context, builder: (context) {
