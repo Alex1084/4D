@@ -16,7 +16,7 @@ class DocXml {
   }
 
    void generationFeuille(){
-     double degMes, degRect, temp;
+     double degreM, degreR, temp;
      final titles = _doc.findAllElements('uneLigne');
      titles.forEach((element) {
        temp = double.parse(element.findElements('Temperature').first.text);
@@ -25,9 +25,9 @@ class DocXml {
        for(var i = 0; i <= 9; i++){
          final cle = element.findAllElements('Cle$i');
          cle.forEach((element) {
-           degMes = double.parse(element.findElements('DegreMesure').first.text);
-           degRect = double.parse(element.findElements('DegreRectifier').first.text);
-           uneligne.ajoutDegreRec(degMes, degRect);
+           degreM = double.parse(element.findElements('DegreMesure').first.text);
+           degreR = double.parse(element.findElements('DegreRectifier').first.text);
+           uneligne.ajoutDegreRec(degreM, degreR);
          });
        }
        _listFeuilleB.add(uneligne);

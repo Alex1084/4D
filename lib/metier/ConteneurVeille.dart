@@ -2,7 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../ihm/Dialog.dart';
 
+
+//cette classe est utiliser dans l'ecran Veille cette classe recoit des donnée qui on ete recherche
 class ConteneurVeille{
+
+  //chaque conteneur est qualifier par deux titre,
+  // un tritre Box utiliser a l'afichage pour la comprehention de l'utilisateur
+  // et un attribut celui ci est utiliser pour l'effectation des donnée afin de pourvoir identifier le type de pese
   String _titreBox, _titreXml, _volume, _degreM, _temperature, _volumeAp, _degreR;
 
   ConteneurVeille(String unTitreBox, String unAttributXml){
@@ -62,15 +68,9 @@ class ConteneurVeille{
         border: Border.all(color: Colors.black, width: 1,),
       ),
 
+      //le widget Inkwell permet de faire une action lorsque l'utilisateur clic dessus celui sir permet d'affiche le pop ip dialogZoom
       child:InkWell(
         onTap: (){
-          if(this._titreBox == 'Brouillis'){
-           // LesDialog.dialogZoomBrouillis(context);
-          }
-          else if(this._titreBox == 'Cuvier'){
-            //LesDialog.dialogZoomCuvier(context);
-          }
-          else {
             LesDialog.dialogZoom(
                 context,
                 this._titreBox,
@@ -79,10 +79,11 @@ class ConteneurVeille{
                 this._volumeAp,
                 this._temperature,
                 this._degreM);
-          }
           },
 
 
+        //le conteuneur affiche les information principal pour les distilateur,
+        // si l'utilisateur souhaite connaitre l'enfoncement mesure et la temperature alors il clic sur la conteneur afin d'afiche le dialog
         child : Column(
           children: <Widget>[
           Text('$_titreBox \n ',

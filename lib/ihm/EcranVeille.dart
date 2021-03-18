@@ -6,7 +6,7 @@ import 'package:tab4dv2/metier/ConteneurVeille.dart';
 import '../Xml/SauvPese.dart';
 import '../Xml/FileUtils.dart';
 
-//l'ecran 4DVeille est Utiliser pour lire les Pese des Journé anterieure.
+//l'ecran 4DVeille est Utiliser pour lire les Pese effectuer la Veille ou les Journé anterieure.
 //l'application va chercher la date demander dans le ficher Xml (nommé Donne-Campagne-<anneeDeDebut>-<anneeDeFin>
 //puis Chaque pese sera Afficher dans le conteneur qui lui Corespond
 class EcranVeille extends StatefulWidget{

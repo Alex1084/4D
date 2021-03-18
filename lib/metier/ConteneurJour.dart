@@ -152,7 +152,7 @@ class _JourConteneur extends State<JourConteneur> {
           border: Border.all(color: Colors.black, width: 1,),
       ),
 
-      //le iwidget Inkwell permet de faire une action lorsque l'utilisateur clic dessus celui sir permet d'affiche le pop ip dialogZoom
+      //le widget Inkwell permet de faire une action lorsque l'utilisateur clic dessus celui sir permet d'affiche le pop ip dialogZoom
       child:InkWell(
         onTap: (){
           LesDialog.dialogZoom(context , widget._titreBox ,widget._volume.toString(), widget._degreR.toString(), widget._volumeAp.toString(), widget._temperature.toString(), widget._degreM.toString());

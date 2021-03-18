@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //cette classe est une classe static elle a pour but de "zoomer" les info d'un Conteneur de Pese en ouvrant un dialog
 // chaque Text equivaut a une variable du conteneur
 class LesDialog{
-  static Future<Null> dialogZoom(BuildContext context, String titre, String volume, String degreRectif, String volumeAp,  String temperature, String degre,)  async{
+  static Future<Null> dialogZoom(BuildContext context, String titre, String volume, String degreRectifie, String volumeAp,  String temperature, String degreMesure,)  async{
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -17,7 +17,7 @@ class LesDialog{
                 style: TextStyle(
                     fontSize: 32
                 ),),
-              Text('enfoncement reel : ${degreRectif}',
+              Text('enfoncement reel : ${degreRectifie}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
@@ -35,7 +35,7 @@ class LesDialog{
                 style: TextStyle(
                     fontSize: 32
                 ),),
-              Text('enfoncement lu : ${degre}',
+              Text('enfoncement lu : ${degreMesure}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
