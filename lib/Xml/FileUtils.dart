@@ -5,8 +5,6 @@ import 'package:path_provider/path_provider.dart';
 
 //lien de documentation : https://pub.dev/packages/path_provider/install
 class FileUtils {
- static int annee = 2020;
- static int anneeproch = annee +1;
   static Future<String> get getExternalPath async {
     //pour trouver le chemin d'un file
     final directory = await getExternalStorageDirectory();
@@ -17,7 +15,7 @@ class FileUtils {
   static Future<File> get getFilePeseSauv async {
     //recherche le file PeseSauv avac les getPathData
     final path = await getExternalPath;
-    return File('$path/donne-Campagne-$annee-$anneeproch.xml');
+    return File('$path/donne-Campagne.xml');
   }
 
   static Future<String> readPeseSauv() async {

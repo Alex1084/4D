@@ -30,10 +30,10 @@ class _EcranJournee extends State<EcranJournee>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    this._vin = new JourConteneur('Vin', 'vinMatin', Colors.grey,);
-    this._teteEtQueue = new JourConteneur('Tete & Queue','TetQ', Colors.grey,);
+    this._vin = new JourConteneur('Vin', 'vinMatin', Colors.grey, uneMarge: true,);
+    this._teteEtQueue = new JourConteneur('Tête & Queue','TetQ', Colors.grey, uneMarge: true,);
     this._edv = new JourConteneur('Eau de vie','EdV', Colors.grey,);
-    this._secondes = new JourConteneur('Secondes','Seconde', Colors.grey,);
+    this._secondes = new JourConteneur('Secondes','Seconde', Colors.grey, uneMarge: true,);
     this._brouillis = new JourConteneur('Brouillis','Brouillis', Colors.grey,);
     this._trenteBc = new JourConteneur('30BC','BC', Colors.grey,);
     _bc = new ConteneurVeille('30BC', 'BC');
@@ -163,6 +163,7 @@ class _EcranJournee extends State<EcranJournee>{
                   ),
                     // cette ligne concerne la mise en chaudiere ce sont ces conteneur qui sont saisie par le distilateur en chef
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _vin,
                       _bc.buildContainer(context),
@@ -189,7 +190,7 @@ class _EcranJournee extends State<EcranJournee>{
                             border: Border.all(color: Colors.black, width: 2,),
 
                           ),
-                          child: Text('Alcool obtenue : Aujourd\'hui',
+                          child: Text('Alcool obtenu : Aujourd\'hui',
                             textAlign: TextAlign.center,
                             style : TextStyle(
                                 fontSize: 24),
@@ -199,6 +200,7 @@ class _EcranJournee extends State<EcranJournee>{
                   ),
                     // cette ligne concerne les conteneur saisie par le distilateur après ces pesee (T&Q, EDV, brouille).
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _teteEtQueue,
                       _edv,
@@ -207,28 +209,35 @@ class _EcranJournee extends State<EcranJournee>{
                   ),
                     // cette ligne concerne les conteneur saisie par le distilateur après ces pesee (seconde et la cuve 30BC)
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _secondes,
                       _trenteBc,
                     ],
                   ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // appelle la methode enregistre et efface les donnees de la memoire cache de jour puis affiche un pop up pour confirmer l'enregistrement
                         RaisedButton(onPressed: () {
-                            enregistrer();
+
                             FileUtils.writeCacheJour('');
                             showDialog(context: context, builder: (context) {
                               return AlertDialog(
                                 title: Text('Sauvegarde'),
-                                content: Text('les Données ont été enregister avec succés'),
+                                content: Text('Etes vous sûr de vouloir enregister les données ?' ),
                                 actions: [
                                   FlatButton(onPressed: (){
                                     Navigator.of(context).pop();
                                   },
-                                      child: Text('OK')
-                                  )
+                                      child: Text('Non')
+                                  ),
+                                  FlatButton(onPressed: (){
+                                    enregistrer();
+                                    Navigator.of(context).pop();
+                                  },
+                                      child: Text('Oui')
+                                  ),
                                 ],
                               );
                             }

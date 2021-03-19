@@ -16,6 +16,7 @@ class JourConteneur extends StatefulWidget{
   String _titreBox, _attributXml, _volumeAp;
   double _volume, _degreM, _temperature, _degreR;
   Color colorConteneur;
+  bool marge = false;
   static MemoireCache enregCache;
 
   static initEnregCache(String path) async{
@@ -65,8 +66,9 @@ class JourConteneur extends StatefulWidget{
 //#endregion
 
 
-  JourConteneur(String unTitre,unAttributXml,Color uneCouleur, {Key key}) : super(key: key){
-    colorConteneur = uneCouleur;
+  JourConteneur(String unTitre,unAttributXml,Color uneCouleur, {Key key, bool uneMarge = false}) : super(key: key){
+    this.marge = uneMarge;
+    this.colorConteneur = uneCouleur;
     this._titreBox = unTitre;
     this._attributXml = unAttributXml;
     this._volume = 0.00;
@@ -159,13 +161,7 @@ class _JourConteneur extends State<JourConteneur> {
           .of(context)
           .size
           .width / 5.5,
-      margin: EdgeInsets.only(bottom: 0, top: MediaQuery
-          .of(context)
-          .size
-          .width / 36, right: 0, left: MediaQuery
-          .of(context)
-          .size
-          .width / 18),
+      margin: (widget.marge == false ? EdgeInsets.only(top: MediaQuery.of(context).size.width / 36, left: MediaQuery.of(context).size.width / 18)  :  EdgeInsets.only(top: MediaQuery.of(context).size.width / 36,)),
       decoration: BoxDecoration(
           color: widget.colorConteneur,
         // color:(widget._titreBox.substring(0,3) =='vin' ? Colors.blue[100] : Colors.greenAccent[100]),
@@ -182,11 +178,11 @@ class _JourConteneur extends State<JourConteneur> {
 
 
         child : Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
           Text('${widget._titreBox}',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.center,
             textDirection: TextDirection.ltr,
+
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24
@@ -196,10 +192,10 @@ class _JourConteneur extends State<JourConteneur> {
             style: TextStyle(
                 fontSize: 18
             ),
-            textAlign: TextAlign.left,),
-          Text('Degre : ${widget._degreR}',
+            textAlign: TextAlign.center,),
+          Text('Enfoncement : ${widget._degreR}',
             textDirection: TextDirection.ltr,
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18
             ),), //Designe le Degré Rectifier
@@ -208,7 +204,7 @@ class _JourConteneur extends State<JourConteneur> {
             style: TextStyle( //Designe le Volume D'alcool Pur
                 fontSize: 18
             ),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.center,
           ),
             Flexible(
             child: Container(
@@ -532,3 +528,5 @@ class _JourConteneur extends State<JourConteneur> {
 
 
 }
+
+

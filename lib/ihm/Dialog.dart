@@ -11,13 +11,13 @@ class LesDialog{
             title: Text('${titre}'),
             children: <Widget>[
 
-              Text(' Volume : ${volume}',
+              Text('Volume : ${volume}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
                     fontSize: 32
                 ),),
-              Text('enfoncement reel : ${degreRectifie}',
+              Text('Enfoncement réel : ${degreRectifie}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
@@ -29,13 +29,13 @@ class LesDialog{
                 style: TextStyle(
                     fontSize: 32
                 ),),
-              Text('temperature : ${temperature}',
+              Text('Température : ${temperature}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
                     fontSize: 32
                 ),),
-              Text('enfoncement lu : ${degreMesure}',
+              Text('Enfoncement lu : ${degreMesure}',
                 textAlign: TextAlign.start,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(

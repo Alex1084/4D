@@ -27,19 +27,19 @@ class _EcranVeille extends State<EcranVeille> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _vin = new ConteneurVeille('Vin', 'vinMatin');
+    _vin = new ConteneurVeille('Vin', 'vinMatin', marge: true);
     _bc = new ConteneurVeille('30BC', 'BC');
     _cuvierCharge = new ConteneurVeille('Cuvier', 'Cuve');
-    _teteEtQueueSoir = new ConteneurVeille('Tete & Queue', 'TetQSoir');
-    _vinSoir = new ConteneurVeille('Vin','vinSoir');
+    _teteEtQueueSoir = new ConteneurVeille('Tête & Queue', 'TetQSoir');
+    _vinSoir = new ConteneurVeille('Vin','vinSoir', marge: true);
     _brouillisJour = new ConteneurVeille('Brouillis Jour', '');
-    _secondeSoir = new ConteneurVeille('Seconde','SecondeSoir');
+    _secondeSoir = new ConteneurVeille('Secondes','SecondeSoir');
     _brouillisNuit = new ConteneurVeille('Brouillis Nuit', 'BrouillisNuit');
-    _teteEtQueue = new ConteneurVeille('Tete & Queue', 'TetQ');
+    _teteEtQueue = new ConteneurVeille('Tête & Queue', 'TetQ', marge: true);
     _edv = new ConteneurVeille('Eau de vie', 'EdV');
-    _secondes = new ConteneurVeille('Seconde', 'Seconde');
-    _brouillis = new ConteneurVeille('Brouillis', 'Brouillis');
-    _trenteBc = new ConteneurVeille('30BC', 'BC');
+    _secondes = new ConteneurVeille('Secondes', 'Seconde');
+    _brouillis = new ConteneurVeille('Brouillis', 'Brouillis' , marge: true);
+    _trenteBc = new ConteneurVeille('30BC', 'BC', marge: true);
     dateJour = new DateTime.now();
     readleFile();
     jourVerif = dateJour.subtract(new Duration(days: 1));
@@ -99,7 +99,7 @@ class _EcranVeille extends State<EcranVeille> {
 
         appBar: AppBar(
           //backgroundColor: Colors.yellow[200],
-          title : Text('${DateFormat('dd/MM/yyyy').format(jourVerif)}    Soir',style : TextStyle( color: Colors.red[900])),
+          title : Text('${DateFormat('dd/MM/yyyy').format(jourVerif)}',style : TextStyle( color: Colors.red[900])),
         ),
         body: Center(
           //le customscroolviex permet de faire defiler l'encran de haut en bas
@@ -128,7 +128,7 @@ class _EcranVeille extends State<EcranVeille> {
                                 //shape: BoxShape.circle,
                                 border: Border.all(color: Colors.black, width: 2,),
                               ),
-                              child: Text('Mise en chaudière',
+                              child: Text('Mise en chaudière le ${DateFormat('dd /MM/yyyy').format(jourVerif)}',
                                 textAlign: TextAlign.center,
                                 style : TextStyle(
                                     fontSize: 24),
@@ -138,6 +138,7 @@ class _EcranVeille extends State<EcranVeille> {
                         ),
                         //cette Ligne contient les Conteneur utiliser pour les Charges des Chaudiere.
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             _vin.buildContainer(context),
                             _bc.buildContainer(context),
@@ -146,6 +147,7 @@ class _EcranVeille extends State<EcranVeille> {
                         ),
                         //cette ligne est le Descriptife du contenuer _cuvierCharge qui n'est que la somme de ces trois conteneur.
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _vinSoir.buildContainer(context),
                             _teteEtQueueSoir.buildContainer(context),
@@ -174,7 +176,7 @@ class _EcranVeille extends State<EcranVeille> {
                                 border: Border.all(color: Colors.black, width: 2,),
 
                               ),
-                              child: Text('Alcool obtenue : Bonne Chauffe',
+                              child: Text('Alcool obtenu le ${DateFormat('dd/MM/yyyy').format(jourVerif)} ',
                                 textAlign: TextAlign.center,
                                 style : TextStyle(
                                     fontSize: 24),
@@ -184,6 +186,7 @@ class _EcranVeille extends State<EcranVeille> {
                         ),
                         // Cette Ligne designe le premier ensemble des pesée de la journée. (T&Q, EDV, Secondes).
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             _teteEtQueue.buildContainer(context),
                             _edv.buildContainer(context),
@@ -193,6 +196,7 @@ class _EcranVeille extends State<EcranVeille> {
                         // Cette Ligne designe le deuxieme ensemble des pesée de la journée. (brouillis , brouillisNuit et BrouillisJour).
                         //les Brouillis jour sont obtenue en faisant la differrence entre les brouillis,  les brouillisNuit et les Seconde.
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             _brouillis.buildContainer(context),
                             _brouillisNuit.buildContainer(context),
@@ -202,6 +206,7 @@ class _EcranVeille extends State<EcranVeille> {
                         ),
                         // Cette Ligne designe le deuxieme ensemble des pesée de la journée. (la cuve30BC et les calcul de rendemant);
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _trenteBc.buildContainer(context),
                             Container(
@@ -231,9 +236,9 @@ class _EcranVeille extends State<EcranVeille> {
                                       fontSize: 18
                                   ),
                                 ),
-                                Text('rendement vin jour : $_rendementChauffeJour %'),
-                                Text('rendement vin nuit : $_rendementChauffeNuit %'),
-                                Text('rendement bonne chauffe : $_rendementBonneChauffe %')
+                                Text('rendement vin jour :\n$_rendementChauffeJour %', textAlign: TextAlign.center,),
+                                Text('rendement vin nuit :\n$_rendementChauffeNuit %', textAlign: TextAlign.center,),
+                                Text('rendement bonne chauffe : $_rendementBonneChauffe %', textAlign: TextAlign.center,),
                               ],
                               ),
                             ),

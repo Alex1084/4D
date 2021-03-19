@@ -10,12 +10,12 @@ class ConteneurVeille{
   // un tritre Box utiliser a l'afichage pour la comprehention de l'utilisateur
   // et un attribut celui ci est utiliser pour l'effectation des donnée afin de pourvoir identifier le type de pese
   String _titreBox, _titreXml, _volume, _degreM, _temperature, _volumeAp, _degreR;
-
-  ConteneurVeille(String unTitreBox, String unAttributXml){
+  bool marge;
+  ConteneurVeille(String unTitreBox, String unAttributXml,{this.marge = false}){
     this._titreBox= unTitreBox;
     this._titreXml = unAttributXml;
   }
-//#region les setteurs.
+  //#region les setteurs.
   void setVolume(String value) {
     _volume = value;
   }
@@ -55,13 +55,8 @@ class ConteneurVeille{
           .of(context)
           .size
           .width / 5.5,
-      margin: EdgeInsets.only(bottom: 0, top: MediaQuery
-          .of(context)
-          .size
-          .width / 36, right: 0, left: MediaQuery
-          .of(context)
-          .size
-          .width / 18),
+      margin: (marge == false ? EdgeInsets.only(top: MediaQuery.of(context).size.width / 36, left: MediaQuery.of(context).size.width / 18)  :  EdgeInsets.only(top: MediaQuery.of(context).size.width / 36,)),
+
       decoration: BoxDecoration(
         color: Colors.grey,
         //shape: BoxShape.circle,
@@ -87,21 +82,21 @@ class ConteneurVeille{
         child : Column(
           children: <Widget>[
           Text('$_titreBox \n ',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.center,
             textDirection: TextDirection.ltr,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24
             ),), //Titre du Container.
-          Text('Volume :  $_volume', textDirection: TextDirection.ltr,
+          Text('Volume :  $_volume', textDirection: TextDirection.ltr, textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18
             ),), //Designe le Volume Mersure
-          Text('Degre : $_degreR', textDirection: TextDirection.ltr,
+          Text('Enfoncement : $_degreR', textDirection: TextDirection.ltr, textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18
             ),), //Designe le Degré Rectifier
-          Text('Volume AP : $_volumeAp', textDirection: TextDirection.ltr,
+          Text('Volume AP : $_volumeAp', textDirection: TextDirection.ltr, textAlign: TextAlign.center,
             style: TextStyle( //Designe le Volume D'alcool Pur
                 fontSize: 18
             ),),

@@ -10,7 +10,7 @@ import '../metier/ConteneurJour.dart';
 
 //cette ecran est utiliser par les distilateur travaillant de nuit,
 // le distilateur en chef remplie les conteneur vin secondevin et teteEtQueuevin pour le distilateur
-// ensuite lorque les brouillis obtenue sont mesure les distilateur saisie le conteneur brouillis nuit et enregistre les donnée de cette ecran
+// ensuite lorque les brouillis obtenu sont mesure les distilateur saisie le conteneur brouillis nuit et enregistre les donnée de cette ecran
 class EcranNuit extends StatefulWidget{
   @override
   _EcranNuit createState() => new _EcranNuit();
@@ -24,10 +24,10 @@ class _EcranNuit extends State<EcranNuit>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    this._vin = new JourConteneur('Vin', 'vinSoir', Colors.grey,);
+    this._vin = new JourConteneur('Vin', 'vinSoir', Colors.grey, uneMarge: true,);
     this._secondeVin = new JourConteneur('Secondes','SecondeSoir', Colors.grey,);
-    this._teteEtQueueVin = new JourConteneur('Tete & Queue','TetQSoir', Colors.grey,);
-    this._BrouillisNuit = new JourConteneur('Brouillis Nuit', 'BrouillisNuit', Colors.grey,);
+    this._teteEtQueueVin = new JourConteneur('Tête & Queue','TetQSoir', Colors.grey,);
+    this._BrouillisNuit = new JourConteneur('Brouillis Nuit', 'BrouillisNuit', Colors.grey, uneMarge: true,);
     _totalVolumeAp = 1;
     _totalVolume = 1;
     readCache();
@@ -137,6 +137,7 @@ class _EcranNuit extends State<EcranNuit>{
               ),
               // cette ligne concerne la mise en chaudiere ce sont ces conteneur qui sont saisie par le distilateur en chef
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children : [
                 _vin,
                 _secondeVin,
@@ -216,7 +217,7 @@ class _EcranNuit extends State<EcranNuit>{
                       //shape: BoxShape.circle,
                       border: Border.all(color: Colors.black, width: 2,),
                     ),
-                    child: Text('Brouillis Obtenue cette Nuit',
+                    child: Text('Brouillis obtenu cette nuit',
                       textAlign: TextAlign.center,
                       style : TextStyle(
                           fontSize: 24),
@@ -226,30 +227,47 @@ class _EcranNuit extends State<EcranNuit>{
               ),
               // cette ligne concerne les conteneur saisie par le distilateur après ces pesee
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _BrouillisNuit,
                 ],
               ),
 
-              // appelle la methode enregistre et efface les donnees de la memoire cache de nuit puis affiche un pop up pour confirmer l'enregistrement
-              RaisedButton(onPressed: () {
-                  enregistrer();
-                  FileUtils.writeCacheNuit('');
-                  showDialog(context: context, builder: (context) {
-                    return AlertDialog(
-                      title: Text('Sauvegarde'),
-                      content: Text('les Données ont été enregister avec succés'),
-                      actions: [
-                        FlatButton(onPressed: (){
-                          Navigator.of(context).pop();
-                        }, child: Text('OK'))
-                      ],
-                    );
-                  }
-                  );
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // appelle la methode enregistre et efface les donnees de la memoire cache de jour puis affiche un pop up pour confirmer l'enregistrement
+                  RaisedButton(onPressed: () {
 
-              },
-                child: Text('enregistrer'),)
+                    FileUtils.writeCacheJour('');
+                    showDialog(context: context, builder: (context) {
+                      return AlertDialog(
+                        title: Text('Sauvegarde'),
+                        content: Text('Etes vous sûr de vouloir enregister les données ?' ),
+                        actions: [
+                          FlatButton(onPressed: (){
+                            Navigator.of(context).pop();
+                          },
+                              child: Text('Non')
+                          ),
+                          FlatButton(onPressed: (){
+                            enregistrer();
+                            Navigator.of(context).pop();
+                          },
+                              child: Text('Oui')
+                          ),
+                        ],
+                      );
+                    }
+                    );
+                    setState(() {
+                      widget.createState();
+                    });
+
+                  },
+                    child: Text('enregistrer'),)
+                ],
+              ),
             ],
           );
         },
