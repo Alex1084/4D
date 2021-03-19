@@ -5,7 +5,6 @@ import '../metier/GuideAlcoo.dart';
 // et transforme une balise <unLigne> en un objet GuideAlcoo
 // puis ces objet stocke dans une list
 class DocXml {
-  //List<GuideAlcoo> feuilleB = new List();
    XmlDocument _doc;
    List<GuideAlcoo> _listFeuilleB;
    List<String> listElement;
@@ -36,6 +35,5 @@ class DocXml {
 
    List<GuideAlcoo> get listFeuilleB => _listFeuilleB;
 
-//XmlDocument get doc => _doc;
    //}
 }

@@ -14,6 +14,7 @@ class JourConteneur extends StatefulWidget{
   // et un attribut celui ci est utiliser dans l'enregistrement du fichier xml afin de pourvoir identifier le type de pese
   String _titreBox, _attributXml, _volumeAp;
   double _volume, _degreM, _temperature, _degreR;
+  Color colorConteneur;
   static MemoireCache enregCache;
 
   static initEnregCache(String path) async{
@@ -63,7 +64,8 @@ class JourConteneur extends StatefulWidget{
 //#endregion
 
 
-  JourConteneur(String unTitre,unAttributXml, {Key key}) : super(key: key){
+  JourConteneur(String unTitre,unAttributXml,Color uneCouleur, {Key key}) : super(key: key){
+    colorConteneur = uneCouleur;
     this._titreBox = unTitre;
     this._attributXml = unAttributXml;
     this._volume = 0.00;
@@ -73,6 +75,7 @@ class JourConteneur extends StatefulWidget{
     this._degreR = 0.00;
   }
 
+
   @override
   _JourConteneur createState() => new _JourConteneur();
 
@@ -81,27 +84,44 @@ class JourConteneur extends StatefulWidget{
 class _JourConteneur extends State<JourConteneur> {
   DocXml data;
 
-  //cette methode est utiliser dans le seul but de mettre a jour l'interface un fois que la saisie d'une pese est valider
+//cette methode est utiliser dans le seul but de mettre a jour l'interface un fois que la saisie d'une pese est valider
   void setStateContainer(){
     setState(() {
-
     });
   }
 
+  //cette methode va chercher dans la liste de guideAlcoo pour retourner l'enfoncement reel grace a le temperature et l'enfoncement lu
+  //la liste unGuide est obtenue grace au getteur se trouvent dans le document DaoGuideAlcoo
   double rechercheDegre(List<GuideAlcoo> unGuide, double unDegreMesure,double uneTemperature) {
     double degreRectifie = 0;
     int degreRangeMesure;
+    bool trouver = false;
+    bool finis = false;
     degreRangeMesure = unDegreMesure.toInt();
-    GuideAlcoo unGuideAlcoo = new GuideAlcoo(0);
-    unGuide.forEach((GuideAlcoo unGuideAlcoo) {
-      if (uneTemperature == unGuideAlcoo.getTemperature() && unGuideAlcoo.degreRectifie.containsKey(degreRangeMesure))
-        unGuideAlcoo.degreRectifie.forEach((key, value) {
-          if (unDegreMesure == key) {
-            degreRectifie = value;
-          }
-        });
-    });
-    return degreRectifie;
+    int i = 0;
+    while(trouver == false && finis == false )
+    {
+      //print(i);
+      if(uneTemperature == unGuide[i].getTemperature() && unGuide[i].degreRectifie.containsKey(degreRangeMesure))
+      {
+        degreRectifie = unGuide[i].degreRectifie[unDegreMesure];
+        trouver = true;
+      }
+      else
+      if (i == unGuide.length-1)
+      {
+        finis = true;
+      }
+      else {
+        i++;
+      };
+    }
+    if (trouver == true){
+      return degreRectifie;
+    }
+    else if(finis = true){
+      return -1;
+    }
   }
 
   // cette methode est un controlle de saisie elle creer une exception si les donne saisie par l'utilisateur ne peuvent pas etre converti en double
@@ -146,7 +166,7 @@ class _JourConteneur extends State<JourConteneur> {
           .size
           .width / 18),
       decoration: BoxDecoration(
-          color: Colors.grey,
+          color: widget.colorConteneur,
         // color:(widget._titreBox.substring(0,3) =='vin' ? Colors.blue[100] : Colors.greenAccent[100]),
         //shape: BoxShape.circle,
           border: Border.all(color: Colors.black, width: 1,),
@@ -224,7 +244,7 @@ class _JourConteneur extends State<JourConteneur> {
     TextEditingController temperatureDialog = new TextEditingController();
     TextEditingController  degreDialog = new TextEditingController();
     String textErreur = '';
-    double verif = 0.00;
+    double verif;
     String assetPath;
     bool verifTemp, verifDegre, verifVolume;
 

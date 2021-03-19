@@ -18,19 +18,18 @@ class EcranNuit extends StatefulWidget{
 
 class _EcranNuit extends State<EcranNuit>{
   JourConteneur _vin, _secondeVin, _teteEtQueueVin, _BrouillisNuit; //ces conteneur sont des Statefullwidget et sont donc implementer directement dans l'interface en appelent l'objet
-  double _totalVolume, _totalVolumeAp, _rendement;
+  double _totalVolume, _totalVolumeAp;
   SauvPese enregistreNuit;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    this._vin = new JourConteneur('Vin', 'vinSoir');
-    this._secondeVin = new JourConteneur('Secondes','SecondeSoir');
-    this._teteEtQueueVin = new JourConteneur('Tete & Queue','TetQSoir');
-    this._BrouillisNuit = new JourConteneur('Brouillis Nuit', 'BrouillisNuit');
+    this._vin = new JourConteneur('Vin', 'vinSoir', Colors.grey,);
+    this._secondeVin = new JourConteneur('Secondes','SecondeSoir', Colors.grey,);
+    this._teteEtQueueVin = new JourConteneur('Tete & Queue','TetQSoir', Colors.grey,);
+    this._BrouillisNuit = new JourConteneur('Brouillis Nuit', 'BrouillisNuit', Colors.grey,);
     _totalVolumeAp = 1;
     _totalVolume = 1;
-    _rendement = 0;
     readCache();
 
   }

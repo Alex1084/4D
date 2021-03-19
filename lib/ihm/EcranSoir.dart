@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
+import 'package:tab4dv2/metier/ConteneurVeille.dart';
 import '../Xml/SauvPese.dart';
 import '../Xml/FileUtils.dart';
 import '../metier/ConteneurJour.dart';
@@ -21,7 +22,7 @@ class EcranJournee extends StatefulWidget{
 
 class _EcranJournee extends State<EcranJournee>{
   JourConteneur _vin, _teteEtQueue, _edv, _secondes, _brouillis, _trenteBc; //ces conteneur sont des Statefullwidget et sont donc implementer directement dans l'interface en appelent l'objet
-  JourConteneur _bc;
+  ConteneurVeille _bc; // ce conteneur doit afficher les donne de la cuve 30BC qui a ete pese la Veille
 
   SauvPese enregistreJourne;
 
@@ -29,14 +30,22 @@ class _EcranJournee extends State<EcranJournee>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    this._vin = new JourConteneur('Vin', 'vinMatin');
-    this._teteEtQueue = new JourConteneur('Tete & Queue','TetQ');
-    this._edv = new JourConteneur('Eau de vie','EdV');
-    this._secondes = new JourConteneur('Secondes','Seconde');
-    this._brouillis = new JourConteneur('Brouillis','Brouillis');
-    this._trenteBc = new JourConteneur('30BC','BC');
-    _bc = new JourConteneur('30BC', 'BCcharge');
+    this._vin = new JourConteneur('Vin', 'vinMatin', Colors.grey,);
+    this._teteEtQueue = new JourConteneur('Tete & Queue','TetQ', Colors.grey,);
+    this._edv = new JourConteneur('Eau de vie','EdV', Colors.grey,);
+    this._secondes = new JourConteneur('Secondes','Seconde', Colors.grey,);
+    this._brouillis = new JourConteneur('Brouillis','Brouillis', Colors.grey,);
+    this._trenteBc = new JourConteneur('30BC','BC', Colors.grey,);
+    _bc = new ConteneurVeille('30BC', 'BC');
     readCache();
+    readBc();
+  }
+
+  void readBc() async {
+    SauvPese readBc;
+    readBc = new SauvPese(path: await FileUtils.readPeseSauv());
+    readBc.setRead(DateFormat('dd/MM/yyyy').format(DateTime.now().subtract(Duration(days: 1))), _bc);
+    setState(() {});
   }
 
 
@@ -47,7 +56,6 @@ class _EcranJournee extends State<EcranJournee>{
     String _text;
     Map<int, JourConteneur> _mapEnreg = new Map<int, JourConteneur>();
     _mapEnreg[1] = _vin;
-    _mapEnreg[2] = _bc;
     _mapEnreg[4] = _teteEtQueue;
     _mapEnreg[5] = _edv;
     _mapEnreg[6] = _secondes;
@@ -73,12 +81,12 @@ class _EcranJournee extends State<EcranJournee>{
     }
     else{
       JourConteneur.enregCache.readCacheXml(_vin);
-      JourConteneur.enregCache.readCacheXml(_bc);
       JourConteneur.enregCache.readCacheXml(_teteEtQueue);
       JourConteneur.enregCache.readCacheXml(_edv);
       JourConteneur.enregCache.readCacheXml(_brouillis);
       JourConteneur.enregCache.readCacheXml(_secondes);
       JourConteneur.enregCache.readCacheXml(_trenteBc);
+      //_vin.setStateContainer();
       setState(() {});
     }
   }
@@ -157,7 +165,7 @@ class _EcranJournee extends State<EcranJournee>{
                   Row(
                     children: <Widget>[
                       _vin,
-                      _bc,
+                      _bc.buildContainer(context),
                     ],
                   ),
                   Row(

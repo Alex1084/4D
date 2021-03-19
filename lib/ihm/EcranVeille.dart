@@ -29,7 +29,7 @@ class _EcranVeille extends State<EcranVeille> {
     // TODO: implement initState
     super.initState();
     _vin = new ConteneurVeille('Vin', 'vinMatin');
-    _bc = new ConteneurVeille('30BC', 'BCcharge');
+    _bc = new ConteneurVeille('30BC', 'BC');
     _cuvierCharge = new ConteneurVeille('Cuvier', 'Cuve');
     _teteEtQueueSoir = new ConteneurVeille('Tete & Queue', 'TetQSoir');
     _vinSoir = new ConteneurVeille('Vin','vinSoir');
@@ -66,7 +66,7 @@ class _EcranVeille extends State<EcranVeille> {
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueueSoir);
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _secondeSoir);
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _brouillisNuit);
-    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _bc);
+    donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif.subtract(Duration(days: 1))), _bc);
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _teteEtQueue);
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _edv);
     donneCampagne.setRead(DateFormat('dd/MM/yyyy').format(jourVerif), _secondes);
